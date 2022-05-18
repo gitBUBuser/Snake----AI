@@ -2,14 +2,15 @@ import pygame
 import snake_rules
 import Colors
 
-class GameObject(pygame.sprite.Sprite):
-    def __init__(self):
-            super(GameObject, self).__init__()
-            self.surf = pygame.surface(snake_rules.pixel_size[0], snake_rules.pixel_size[1])
-            self.surf.fill(Colors.GREEN)
+class Game_Object:
+
+    def __init__(self, size = snake_rules.pixel_size, color = Colors.GREEN, start_pos = (0,0)):
+            self.surf = pygame.Surface(size)
+            self.surf.fill(color)
             self.rect = self.surf.get_rect()
+            self.rect.move_ip(start_pos)
             
  
-    def update(event):
+    def update(self, event):
         pass
 

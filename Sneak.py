@@ -11,7 +11,7 @@ pygame.display.set_caption("SneakySnake")
 
 snake_pos_x = 0
 snake_pos_y = 0
-obje = GameObject
+obje = GameObject.Game_Object(start_pos=(32,32))
 game_objects = [obje]
 
 clock = pygame.time.Clock()
@@ -21,7 +21,6 @@ update = True
 
 def update_logic(event):
     for g_o in game_objects:
-        obje.update(event)
         g_o.update(event)
 
         
