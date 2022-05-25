@@ -11,14 +11,15 @@ class movement_event():
             "Error! Couldn't add movement event"
     
      def execute(self):
-         self.object.step(self.new_move)
+         self.object.move(self.new_move)
+         return self.object
 
      def get_object(self):
          return self.object
 
      def change_move(self, new_move):
          if type(new_move) == tuple:
-             self.new_move == new_move
+             self.new_move = new_move
 
 class movement_event_handler():
     def __init__(self):
@@ -43,10 +44,11 @@ class movement_event_handler():
         self.events.clear()
 
     def execute_events(self):
-        print(len(self.events))
+        moved_objects = []
         for event in self.events:
-            event.execute()
-        self.clear()
+            moved_objects.append(event.execute())
+        self.events.clear()
+        return moved_objects
 
 
 
