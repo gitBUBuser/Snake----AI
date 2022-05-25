@@ -40,8 +40,10 @@ class GameConcepts():
     def add_food(self):
         object_rep = []
         for o in self.game_objects:
-            object_rep.append(o.position)
+            shei = o.rect.get_position()
+            object_rep.append((int(shei[0]), int(shei[1])))
         rando_pos = self.map_reader.get_random_spawn_location()
+
         while rando_pos in object_rep:
             print("respawn")
             rando_pos = self.map_reader.get_random_spawn_location()
@@ -67,7 +69,7 @@ screen = pygame.display.set_mode(g_concepts.map_reader.res)
 pygame.display.set_caption("SneakySnake")
 f_timer_movement = 0
 
-g_concepts.add_object_to_game(snake_object.PlayerSnake(g_concepts, start_pos = (240,240)))
+g_concepts.add_object_to_game(snake_object.PlayerSnake(g_concepts, start_pos = (240,240), tag="Snake"))
 
 
 clock = pygame.time.Clock()
@@ -82,7 +84,7 @@ def collision_check(moved_objects):
         for m_o in moved_objects:
             for o in g_concepts.game_objects:
                 if m_o != o:
-                    if m_o.rect.colliderect(o.rect):
+                    if m_o.rect.collides_with(o.rect):
                         m_o.on_collision(o)
                         o.on_collision(m_o)
     
@@ -99,7 +101,7 @@ def update_logic():
         
 def draw():
     for g_o in g_concepts.game_objects:
-        screen.blit(g_o.surf, g_o.rect)
+        g_o.draw(screen)
 
 while update:
     for event in pygame.event.get():
@@ -112,9 +114,9 @@ while update:
     if(movement_check()):
         f_timer_movement = 0
     
-    screen.fill(Colors.WHITE)
+    screen.fill(Colors.BACKGROUND_GRAY)
     draw()
     pygame.display.flip()
 
-    clock.tick(60)
+    clock.tick(snake_rules.f_rate)
 pygame.quit()

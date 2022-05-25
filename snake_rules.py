@@ -14,8 +14,10 @@ left_key = pygame.K_a
 right_key = pygame.K_d
 up_key = pygame.K_w
 down_key = pygame.K_s
+select_key = pygame.K_RETURN
 
 f_step_interval = 4
+f_rate = 60
 
 
 def add_vectors(a = (0,0), b = (0,0)):
@@ -31,5 +33,6 @@ def multiply_vectors(a = (0,0), b = (0,0)):
          return "failed, wrong type"
 
 
-   
+def multiply_vector(a = (0,0), b = 0):
+    return (a[0] * b, a[1] * b)
     
