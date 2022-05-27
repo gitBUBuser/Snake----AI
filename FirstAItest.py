@@ -1,4 +1,5 @@
 
+
 import pygame
 import Colors
 import snake_rules
@@ -9,12 +10,12 @@ import ConceptsAndClasses
 import food
 pygame.init()
 
-
 class GameConcepts():
     def __init__(self):
         self.map_reader = MapReader.MapReader("Map1.txt")
         self.game_objects = []
         self.object_positions = []
+        self.map_state = []
         self.food = []
 
         for position in self.map_reader.get_wall_positions():
@@ -54,6 +55,7 @@ class GameConcepts():
         self.game_objects.append(n_food)
         self.food.append(n_food)
     
+    def update_object_state(tag, )
 
     def is_there_food(self, wanted_food_count):
         return len(self.food) < wanted_food_count
@@ -70,7 +72,7 @@ screen = pygame.display.set_mode(g_concepts.map_reader.res)
 pygame.display.set_caption("SneakySnake")
 f_timer_movement = 0
 
-g_concepts.add_object_to_game(snake_object.PlayerSnake(g_concepts, start_pos = (240,240), tag="Snake"))
+g_concepts.add_object_to_game(snake_object.AI_Test(g_concepts, start_pos = (240,240), tag="Snake"))
 
 
 clock = pygame.time.Clock()
@@ -91,6 +93,8 @@ def collision_check(moved_objects):
     
 def movement_check():
     if f_timer_movement >= snake_rules.f_step_interval:
+        for g_o in g_concepts.game_objects:
+            g_o.fixed_update()
         collision_check(g_concepts.movement_events.execute_events())
         return True
     return False

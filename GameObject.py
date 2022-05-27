@@ -21,6 +21,9 @@ class Game_Object:
     def on_collision(self, an_object):
         pass
 
+    def fixed_update(self):
+        pass
+
     def move(self, direction):
         move_amount = snake_rules.multiply_vectors(direction, snake_rules.step)
         self.rect.move(move_amount)

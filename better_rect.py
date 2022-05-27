@@ -1,4 +1,4 @@
-from turtle import position
+
 import pygame
 import snake_rules
 import Colors

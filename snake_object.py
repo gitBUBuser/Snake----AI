@@ -58,6 +58,17 @@ class Snake(GameObject.Game_Object):
     def update_logic(self):
         return super().update_logic()
 
+class AI_Test(Snake):
+    def __init__(self, GM, size=snake_rules.pixel_size, color=Colors.BLACK, start_pos=(0, 0), tag="Snake", length=2):
+        super().__init__(GM, size, color, start_pos, tag, length)
+        
+
+    def get_map_representation(self):
+        return GM.map
+    def fixed_update(self):
+        
+
+
 class PlayerSnake(Snake):
     def __init__(self,GM, size=snake_rules.pixel_size, color=Colors.AMNIENT_GREEN, start_pos=(0, 0), tag="Snake", length = 2):
         super().__init__(GM, size, color, start_pos, tag, length)
