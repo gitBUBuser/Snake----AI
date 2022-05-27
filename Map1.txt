@@ -1,28 +1,10 @@
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-x                                                x
-x                                                x
-x                                                x
-x                                                x
-x                                                x
-x                                                x
-x                                                x
-x                                                x
-x                      xxxxxxx                   x
-x                      x     x                   x
-x                      x     x                   x
-x                      x     x                   x
-x                      x     x                   x
-x                      xxxxxxx                   x
-x                                                x
-x                                                x
-x                                                x
-x                                                x
-x                                                x
-x                                                x
-x                                                x
-x                                                x
-x                                                x
-x                                                x
-x                                                x
-x                                                x
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxx
+x                        x 
+x                        x
+x                        x
+x                        x
+x                        x
+x                        x
+x                        x
+x                        x
+xxxxxxxxxxxxxxxxxxxxxxxxxx

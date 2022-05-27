@@ -19,6 +19,27 @@ select_key = pygame.K_RETURN
 f_step_interval = 4
 f_rate = 60
 
+def dir_to_string(direction):
+    step_x = step[0]
+    if direction == multiply_vector(up, 24):
+        return "up"
+    if direction == multiply_vector(down, 24):
+        return "down"
+    if direction == multiply_vector(left,24):
+        return "left"
+    if direction == multiply_vector(right,24):
+        return "right"
+
+def string_to_dir(dir_string):
+    if dir_string == "up":
+        return up
+    if dir_string == "down":
+        return down
+    if dir_string == "left":
+        return left
+    if dir_string == "right":
+        return right
+
 
 def add_vectors(a = (0,0), b = (0,0)):
     if type(a) == tuple and type(b) == tuple:

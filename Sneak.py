@@ -18,7 +18,7 @@ class GameConcepts():
         self.food = []
 
         for position in self.map_reader.get_wall_positions():
-            self.add_object_to_game(GameObject.Game_Object(self ,color=Colors.BLACK, start_pos=position, tag ="Wall"))
+            self.add_object_to_game(GameObject.Game_Object(self ,color=Colors.BLACK, start_pos=position, tag ="w"))
 
         self.movement_events = ConceptsAndClasses.movement_event_handler()
         
@@ -70,7 +70,7 @@ screen = pygame.display.set_mode(g_concepts.map_reader.res)
 pygame.display.set_caption("SneakySnake")
 f_timer_movement = 0
 
-g_concepts.add_object_to_game(snake_object.PlayerSnake(g_concepts, start_pos = (240,240), tag="Snake"))
+g_concepts.add_object_to_game(snake_object.PlayerSnake(g_concepts, start_pos = (72,72), tag="Snake"))
 
 
 clock = pygame.time.Clock()
