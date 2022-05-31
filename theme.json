@@ -1,0 +1,30 @@
+	
+
+ {
+    "panel":
+    {
+        "colours":
+        {
+            "dark_bg":  "#1b2631",
+            "normal_border": "#17202a"
+        },
+
+        "background_image":
+        {
+            "package": "data.images",
+            "resource": "splat.png",
+            "sub_surface_rect": "0,0,32,32"
+        },
+
+        "misc":
+        {
+            "shape": "rounded_rectangle",
+            "shape_corner_radius": "10",
+            "border_width": "2",
+            "shadow_width": "5"
+        }
+        
+
+       
+    }
+}

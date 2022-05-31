@@ -11,12 +11,15 @@ import python_utils
 class Snake(GameObject.Game_Object):
     def __init__(self, GM, size=snake_rules.pixel_size, color=Colors.AMNIENT_GREEN, start_pos=(0, 0), tag="sh", length = 2):
         super().__init__(GM, size, color,start_pos,tag=tag, corner_radius=10)
-
+        
         self.move_dir = (0,0)
         self.body = []
         self.last_move = ()
         self.old_pos = start_pos
         self.length = length
+        
+        # Adds user interface for the snake
+        self.GM.add_interface(self)
 
         self.body.append(self)
         for i in range(1, self.length):
@@ -28,7 +31,9 @@ class Snake(GameObject.Game_Object):
 
     def on_collision(self, an_object):
         if an_object.tag == "w":
-            self.revert_previous_move()
+            self.GM.collided_with_illegal()
+        if an_object.tag == "s" and len(self.body) > 3:
+            self.GM.collided_with_illegal()
         return super().on_collision(an_object)
 
     def update_events(self, event):
@@ -49,17 +54,8 @@ class Snake(GameObject.Game_Object):
     def add_length(self, amount):
         for i in range(amount):
             self.body.append(SnakeBodyObject(self.GM,follow_object=self.body[-1],snek=self, start_pos=self.body[-1].rect.get_position()))
-            
-    def step(self, direction):
-        pass
-        #self.old_positions.append(self.position)
-        #self.last_move = direction
-        #for i in range(len(self.body)):
-        #    self.body[i].step(self.old_positions[-i - 1])
-        #return super().step(direction)
+        self.GM.add_score_to_UI(len(self.body), self)
 
-    def update_logic(self):
-        return super().update_logic()
 
 
 class SnakeState():
@@ -253,9 +249,6 @@ class PlayerSnake(Snake):
     def __init__(self,GM, size=snake_rules.pixel_size, color=Colors.AMNIENT_GREEN, start_pos=(0, 0), tag="sh", length = 2):
         super().__init__(GM, size, color, start_pos, tag, length)
 
-    def control(self):
-        return super().control()
-
     def update_events(self, event):
         if event.type == pygame.KEYDOWN:
             if event.key == snake_rules.down_key and self.last_move != snake_rules.up:
@@ -272,7 +265,7 @@ class PlayerSnake(Snake):
 
         return super().update_events(event)
 
-    def update_logic(self):
+    def update_logic(self, delta_time):
         self.GM.add_movement_event(self, self.move_dir)
     
 

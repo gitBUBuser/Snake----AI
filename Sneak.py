@@ -1,76 +1,30 @@
 
+from multiprocessing.spawn import get_command_line
 import pygame
 import Colors
 import snake_rules
+import UI_extras
 import GameObject
 import snake_object
 import MapReader
 import ConceptsAndClasses
 import food
+import UI
 pygame.init()
 
 
-class GameConcepts():
-    def __init__(self):
-        self.map_reader = MapReader.MapReader("Map1.txt")
-        self.game_objects = []
-        self.object_positions = []
-        self.food = []
 
-        for position in self.map_reader.get_wall_positions():
-            self.add_object_to_game(GameObject.Game_Object(self ,color=Colors.BLACK, start_pos=position, tag ="w"))
-
-        self.movement_events = ConceptsAndClasses.movement_event_handler()
-        
-    def add_object_to_game(self, new_object):
-        self.game_objects.append(new_object)
-
-    def kill_object(self, an_object):
-        if isinstance(an_object,GameObject.Game_Object) and an_object in self.game_objects:
-            self.game_objects.remove(an_object)
-            if isinstance(an_object, food.Food):
-                self.food.remove(an_object)
-        else:
-            return "Object is, or cannot, be removed"
-
-    def food_check(self):
-        if len(self.food) < 1:
-            self.add_food()
-        
-    def add_food(self):
-        object_rep = []
-        for o in self.game_objects:
-            shei = o.rect.get_position()
-            object_rep.append((int(shei[0]), int(shei[1])))
-            
-        rando_pos = self.map_reader.get_random_spawn_location()
-
-        while rando_pos in object_rep:
-            print("respawn")
-            rando_pos = self.map_reader.get_random_spawn_location()
-        
-        n_food = food.Food(self,start_pos=rando_pos)
-
-        self.game_objects.append(n_food)
-        self.food.append(n_food)
-    
-
-    def is_there_food(self, wanted_food_count):
-        return len(self.food) < wanted_food_count
-
-    def add_movement_event(self, an_object, a_move):
-        if an_object in self.game_objects:
-            self.movement_events.add_event(an_object, a_move)
-        else:
-            return "Error! object cannot be moved"
         
 g_concepts = GameConcepts()
 
-screen = pygame.display.set_mode(g_concepts.map_reader.res)
+screen = pygame.display.set_mode(g_concepts.true_res)
 pygame.display.set_caption("SneakySnake")
-f_timer_movement = 0
 
-g_concepts.add_object_to_game(snake_object.PlayerSnake(g_concepts, start_pos = (72,72), tag="Snake"))
+
+
+f_timer_movement = 0
+getTicksLastFrame = 0
+g_concepts.add_object_to_game(snake_object.PlayerSnake(g_concepts, start_pos = (72,72), tag="sh"))
 
 
 clock = pygame.time.Clock()
@@ -104,17 +58,26 @@ def draw():
     for g_o in g_concepts.game_objects:
         g_o.draw(screen)
 
+    g_concepts.UI.draw(screen)
+
+
 while update:
+    t = pygame.time.get_ticks()
+    delta_time = (t - getTicksLastFrame) / 1000.0
+    getTicksLastFrame = t
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             update = False
         update_events(event)
+        g_concepts.UI.update_events(event)
 
     update_logic()
     f_timer_movement += 1
     if(movement_check()):
         f_timer_movement = 0
-    
+    g_concepts.UI.update(delta_time)
+
+
     screen.fill(Colors.BACKGROUND_GRAY)
     draw()
     pygame.display.flip()

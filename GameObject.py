@@ -15,7 +15,7 @@ class Game_Object:
     def update_events(self, event):
         pass
 
-    def update_logic(self):
+    def update_logic(self, delta_time):
         pass
 
     def on_collision(self, an_object):
@@ -27,9 +27,6 @@ class Game_Object:
     def move(self, direction):
         move_amount = snake_rules.multiply_vectors(direction, snake_rules.step)
         self.rect.move(move_amount)
-    
-    def step(self, direction):
-        pass
 
     def draw(self, screen):
         self.rect.draw(screen)

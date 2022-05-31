@@ -1,5 +1,4 @@
 
-from re import template
 
 
 BLACK = ( 0, 0, 0)
@@ -12,7 +11,9 @@ DEEP_PURPLE =  (142, 68, 173)
 AMNIENT_GREEN = (20, 143, 119)
 SOFT_RED =  (231, 76, 60)
 
-BACKGROUND_GRAY =  (52, 73, 94)
+
+BACKGROUND_GRAY =  (149, 165, 166)
+UI_Color = ( 0, 0, 0)
 
 
 

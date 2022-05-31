@@ -32,7 +32,6 @@ class BestSurface():
 
     def update_rect(self):
         self.rect.update(self.position, self.size)
-
     
     def get_position(self):
         return self.position

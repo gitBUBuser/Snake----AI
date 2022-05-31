@@ -1,8 +1,11 @@
 import pygame
 
+
 screen_size = (704, 512)
+snake_UI_height = 150
 pixel_size = (24, 24)
 step = (24, 24)
+
 
 up = (0, -1)
 down = (0, 1)
@@ -16,7 +19,7 @@ up_key = pygame.K_w
 down_key = pygame.K_s
 select_key = pygame.K_RETURN
 
-f_step_interval = 4
+f_step_interval = 5
 f_rate = 60
 
 def dir_to_string(direction):

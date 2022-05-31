@@ -1,6 +1,4 @@
-import snake_rules
 import GameObject
-import snake_object
 
 class movement_event():
      def __init__(self, object = None, new_move = None):
