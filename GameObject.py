@@ -27,6 +27,7 @@ class Game_Object:
     def move(self, direction):
         move_amount = snake_rules.multiply_vectors(direction, snake_rules.step)
         self.rect.move(move_amount)
+        self.GM.add_state_to_map_state(self.rect.get_position(), self.tag)
 
     def draw(self, screen):
         self.rect.draw(screen)

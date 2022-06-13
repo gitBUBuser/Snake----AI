@@ -1,6 +1,7 @@
 import G_concepts
 import pygame
 import Colors
+import default_AIs
 import snake_rules
 import snake_object
 
@@ -14,7 +15,7 @@ while not quit:
     screen = pygame.display.set_mode(g_concepts.true_res)
 
     pygame.display.set_caption("SneakySnake")
-    g_concepts.add_object_to_game(snake_object.PlayerSnake(g_concepts, start_pos = g_concepts.get_random_spawn(), tag="sh"))
+    g_concepts.add_object_to_game(default_AIs.test_snake(g_concepts, start_pos = g_concepts.get_random_spawn(), tag="sh"))
 
     clock = pygame.time.Clock()
 

@@ -1,7 +1,7 @@
 import pygame
 
 
-screen_size = (704, 512)
+screen_size = (720, 504)
 snake_UI_height = 150
 pixel_size = (24, 24)
 step = (24, 24)
@@ -19,7 +19,7 @@ up_key = pygame.K_w
 down_key = pygame.K_s
 select_key = pygame.K_RETURN
 
-f_step_interval = 5
+f_step_interval = 3
 f_rate = 60
 
 def dir_to_string(direction):
@@ -47,6 +47,12 @@ def string_to_dir(dir_string):
 def add_vectors(a = (0,0), b = (0,0)):
     if type(a) == tuple and type(b) == tuple:
         return (a[0] + b[0], a[1] + b[1])
+    else:
+        return "failed, wrong type"
+
+def subtract_vectors(a = (0,0), b = (0,0)):
+    if type(a) == tuple and type(b) == tuple:
+        return (a[0] - b[0], a[1] - b[1])
     else:
         return "failed, wrong type"
 

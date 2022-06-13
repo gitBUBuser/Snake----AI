@@ -16,7 +16,7 @@ class GameConcepts():
         self.update = True
 
         self.game_objects = []
-        self.object_positions = []
+        self.map_state = {}
         self.food = []
 
         UI_height = snake_rules.snake_UI_height
@@ -26,9 +26,13 @@ class GameConcepts():
 
         for position in self.map_reader.get_wall_positions():
             self.add_object_to_game(GameObject.Game_Object(self ,color=Colors.BLACK, start_pos=position, tag ="w"))
+            
         
     def add_object_to_game(self, new_object):
+        self.map_state[new_object.rect.get_position()] = new_object.tag
         self.game_objects.append(new_object)
+        if isinstance(new_object, food.Food):
+            self.food.append(new_object)
 
     def add_interface(self, snake):
         self.UI.add_snake_UI((10,self.true_res[1] - snake_rules.snake_UI_height- 10), (self.true_res[0]/ 3.5,snake_rules.snake_UI_height),snake=snake)
@@ -38,6 +42,8 @@ class GameConcepts():
             self.game_objects.remove(an_object)
             if isinstance(an_object, food.Food):
                 self.food.remove(an_object)
+            if self.map_state[an_object.rect.get_position()] == an_object.tag:
+                self.map_state.pop(an_object.rect.get_position())
         else:
             return "Object is, or cannot, be removed"
 
@@ -67,6 +73,10 @@ class GameConcepts():
         
         self.UI.draw(screen)
     
+    def add_state_to_map_state(self, position, tag):
+        self.map_state[position] = tag
+
+
     def get_random_spawn(self):
         object_rep = []
         for o in self.game_objects:
@@ -78,6 +88,15 @@ class GameConcepts():
             random_pos = self.map_reader.get_random_spawn_location()
 
         return random_pos
+
+    def clear_moving_map(self):
+        poppers = []
+        for key, value in self.map_state.items():
+            if value != "w" and value != "f":
+                poppers.append(key)
+        for pops in poppers:
+            self.map_state.pop(pops)
+
 
     def collided_with_illegal(self):
         self.update = False
@@ -103,6 +122,9 @@ class GameConcepts():
 
     def movement_check(self):
         if self.f_step_timer >= snake_rules.f_step_interval:
+            for g_o in self.game_objects:
+                g_o.fixed_update()
+            self.clear_moving_map()
             self.collision_check(self.movement_events.execute_events())
             return True
         return False
